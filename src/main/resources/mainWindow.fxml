@@ -26,12 +26,12 @@
          </font>
       </Label>
       <Button layoutX="157.0" layoutY="180.0" mnemonicParsing="false" onAction="#readPlainText" prefHeight="48.0" prefWidth="122.0" text="Wczytaj" />
-      <Label alignment="CENTER" layoutX="39.0" layoutY="376.0" prefHeight="57.0" prefWidth="358.0" text="Zapisz plik z bitami">
+      <Label alignment="CENTER" layoutX="31.0" layoutY="376.0" prefHeight="57.0" prefWidth="185.0" text="Zapisz plik z bitami">
          <font>
             <Font name="Uni Sans Light" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="saveBitsButton" layoutX="157.0" layoutY="428.0" mnemonicParsing="false" onAction="#saveBits" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
+      <Button fx:id="saveBitsButton" layoutX="62.0" layoutY="428.0" mnemonicParsing="false" onAction="#saveBitsToFile" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
       <Label alignment="CENTER" layoutX="445.0" layoutY="123.0" prefHeight="57.0" prefWidth="358.0" text="Wybierz plik z bitami">
          <font>
             <Font name="Uni Sans Light" size="18.0" />
@@ -61,5 +61,11 @@
          </font>
       </Label>
       <TextArea fx:id="bitsTextField" layoutX="102.0" layoutY="274.0" prefHeight="102.0" prefWidth="232.0" />
+      <Label alignment="CENTER" layoutX="219.0" layoutY="376.0" prefHeight="57.0" prefWidth="185.0" text="Zapisz bity">
+         <font>
+            <Font name="Uni Sans Light" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveBitsButton1" layoutX="250.0" layoutY="428.0" mnemonicParsing="false" onAction="#saveBits" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
    </children>
 </AnchorPane>

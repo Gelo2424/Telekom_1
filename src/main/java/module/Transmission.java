@@ -17,8 +17,7 @@ public class Transmission {
             {1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1}
     };
 
-    public Transmission(String plainText) {
-
+    public Transmission(String plainText, boolean addParityBits) {
         String bitsAsString = StringToBits(plainText);
         bits = new BitSet(bitsAsString.length());
         for(int i = 0; i < bitsAsString.length(); i++) {
@@ -26,24 +25,24 @@ public class Transmission {
                 bits.set(bitsAsString.length() - i - 1);
             }
         }
-        addParityBits(bits);
+        if(addParityBits) {
+            addParityBits(bits);
+        }
     }
 
     public void addParityBits(BitSet bits) {
-        StringBuilder sb = new StringBuilder();
         String bitsString = getBitsAsString(bits);
         BitSet newBitSet = new BitSet(bitsString.length() * 2);
         System.out.println(bitsString + " - poczatek");
-        int amountOfBits = bitsString.length()/8;
-        System.out.println("amountOfBits - " + amountOfBits);
-        for(int n = 0; n < amountOfBits; n++) {
+        int amountOfBytes = bitsString.length()/8;
+        for(int n = 0; n < amountOfBytes; n++) {
 //            String oneByte = bitsString.substring(8 * n, 8 * n + 8);
             BitSet oneByte = bits.get(8 * n, 8 * n + 8);
 
             for(int i = 0; i < 8; i++) {
                 newBitSet.set(n * 16 + i, oneByte.get(i));
             }
-            System.out.println(getBitsAsString(newBitSet) + " - newBitSet1");
+//            System.out.println(getBitsAsString(newBitSet) + " - newBitSet1");
             for(int i = 0; i < 8; i++){
                 int rowSum = 0;
                 for(int j = 0; j < 8; j++) {
@@ -54,15 +53,40 @@ public class Transmission {
                 int parityBit = rowSum % 2;
                 newBitSet.set(8 + (n) * 16 + i, parityBit == 1);
             }
-            System.out.println(getBitsAsString(newBitSet) + " - newBitSet2");
+//            System.out.println(getBitsAsString(newBitSet) + " - newBitSet2");
         }
         setBits(newBitSet);
-        System.out.println();
         System.out.println(getBitsAsString(getBits()));
     }
 
+    public void correctBits() {
+        String bitsString = getBitsAsString(bits);
+        int amountOfBytes = bitsString.length()/16;
+        for(int n = 0; n < amountOfBytes; n++) {
+            int colNum = 0;
+            BitSet newBitSet = new BitSet(8);
+            BitSet twoByte = bits.get(16 * n, 16 * n + 16);
+            for(int i = 0; i < 8; i++) {
+                int rowSum = 0;
+                for(int j = 0; j < 16; j++) {
+                    int bit = twoByte.get(j)?1:0;
+                    rowSum = rowSum + bit * H[i][j];
+                }
+                int bit = rowSum % 2;
+                newBitSet.set(i, bit == 1);
+            }
+            System.out.println(getBitsAsString(newBitSet));
+        }
 
+    }
 
+    public int checkOneColumn(BitSet bits) {
+        return 0;
+    }
+
+    public int[] checkSumOfTwoColumns(BitSet bits) {
+        return null;
+    }
 
     public String StringToBits(String plainText) {
         StringBuilder sb = new StringBuilder();

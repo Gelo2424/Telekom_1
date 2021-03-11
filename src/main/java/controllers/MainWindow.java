@@ -35,12 +35,13 @@ public class MainWindow {
     public Label isBitsFileReadedLabel;
     @FXML
     public TextArea bitsTextField;
+    @FXML
+    public Button saveBitsButton1;
 
 
     public void initialize() {
         savePlainTextButton.setDisable(true);
         saveBitsButton.setDisable(true);
-        checkBitsButton.setDisable(true);
     }
 
 
@@ -52,12 +53,40 @@ public class MainWindow {
             isPlainTextReadedLabel.setStyle("-fx-text-fill: green");
             saveBitsButton.setDisable(false);
             String content = Files.readString(Path.of(file.getPath()), StandardCharsets.US_ASCII);
-            transmission = new Transmission(content);
+            transmission = new Transmission(content, true);
             bitsTextField.setText(transmission.getBitsAsString(transmission.getBits()));
         }
     }
 
+    public void checkBits(ActionEvent actionEvent) {
+        savePlainTextButton.setDisable(false);
+        transmission.correctBits();
+    }
+
     public void saveBits(ActionEvent actionEvent) {
+        String bitsString = bitsTextField.getText();
+        transmission.setBitsFromString(bitsString);
+    }
+
+    public void readBits(ActionEvent actionEvent) throws IOException {
+        fileChooser.setTitle("Wybierz plik z bitami");
+        File file = fileChooser.showOpenDialog(null);
+        if(file != null) {
+            isBitsFileReadedLabel.setText("Plik został wczytany");
+            isBitsFileReadedLabel.setStyle("-fx-text-fill: green");
+            checkBitsButton.setDisable(false);
+            byte[] message = Files.readAllBytes(Path.of(file.getPath()));
+            String mess = new String(message);
+            System.out.println(mess);
+            transmission = new Transmission(mess, false);
+            System.out.println(transmission.StringToBits(mess));
+        }
+    }
+
+    public void savePlainText(ActionEvent actionEvent) {
+    }
+
+    public void saveBitsToFile(ActionEvent actionEvent) {
         fileChooser.setTitle("Wybierz plik do zapisu bitow");
         File file = fileChooser.showSaveDialog(null);
         if(file != null) {
@@ -65,27 +94,12 @@ public class MainWindow {
             transmission.setBitsFromString(bitsString);
             BitSet bits = transmission.getBits();
             byte[] bytes = bits.toByteArray();
-            transmission.reverse(bytes);
+//            transmission.reverse(bytes);
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(bytes);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void readBits(ActionEvent actionEvent) {
-        fileChooser.setTitle("Wybierz plik z bitami");
-        File file = fileChooser.showOpenDialog(null);
-        if(file != null) {
-            isBitsFileReadedLabel.setText("Plik został wczytany");
-            isBitsFileReadedLabel.setStyle("-fx-text-fill: green");
-            checkBitsButton.setDisable(false);
-        }
-    }
-    public void checkBits(ActionEvent actionEvent) {
-        savePlainTextButton.setDisable(false);
-    }
-    public void savePlainText(ActionEvent actionEvent) {
     }
 }
