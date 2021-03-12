@@ -32,20 +32,14 @@
          </font>
       </Label>
       <Button fx:id="saveBitsButton" layoutX="62.0" layoutY="428.0" mnemonicParsing="false" onAction="#saveBitsToFile" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
-      <Label alignment="CENTER" layoutX="445.0" layoutY="123.0" prefHeight="57.0" prefWidth="358.0" text="Wybierz plik z bitami">
+      <Label alignment="CENTER" layoutX="444.0" layoutY="325.0" prefHeight="57.0" prefWidth="358.0" text="Zapisz plik z tekstem jawnym">
          <font>
             <Font name="Uni Sans Light" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="563.0" layoutY="180.0" mnemonicParsing="false" onAction="#readBits" prefHeight="48.0" prefWidth="122.0" text="Wczytaj" />
-      <Label alignment="CENTER" layoutX="445.0" layoutY="376.0" prefHeight="57.0" prefWidth="358.0" text="Zapisz plik z tekstem jawnym">
-         <font>
-            <Font name="Uni Sans Light" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="savePlainTextButton" layoutX="563.0" layoutY="428.0" mnemonicParsing="false" onAction="#savePlainText" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
-      <Button fx:id="checkBitsButton" layoutX="563.0" layoutY="313.0" mnemonicParsing="false" onAction="#checkBits" prefHeight="48.0" prefWidth="122.0" text="Koryguj" />
-      <Label alignment="CENTER" layoutX="452.0" layoutY="256.0" prefHeight="57.0" prefWidth="358.0" text="Koryguj błędy transmisji">
+      <Button fx:id="savePlainTextButton" layoutX="562.0" layoutY="381.0" mnemonicParsing="false" onAction="#savePlainText" prefHeight="48.0" prefWidth="122.0" text="Zapisz" />
+      <Button fx:id="checkBitsButton" layoutX="563.0" layoutY="238.0" mnemonicParsing="false" onAction="#checkBits" prefHeight="48.0" prefWidth="122.0" text="Koryguj" />
+      <Label alignment="CENTER" layoutX="445.0" layoutY="186.0" prefHeight="57.0" prefWidth="358.0" text="Koryguj błędy transmisji">
          <font>
             <Font name="Uni Sans Light" size="18.0" />
          </font>
@@ -55,7 +49,7 @@
             <Font name="Uni Sans Light" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="isBitsFileReadedLabel" alignment="CENTER" layoutX="516.0" layoutY="228.0" prefHeight="33.0" prefWidth="216.0" text="Plik nie został wczytany" textFill="#c60000">
+      <Label fx:id="isBitsFileReadedLabel" alignment="CENTER" layoutX="516.0" layoutY="164.0" prefHeight="33.0" prefWidth="216.0" text="Brak wiadomosci w pamięci" textFill="#c60000">
          <font>
             <Font name="Uni Sans Light" size="12.0" />
          </font>

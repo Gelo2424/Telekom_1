@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+//Glowna klasa JavaFX
 public class MainApp extends Application {
 
     @Override
